@@ -14,13 +14,13 @@ while($true) {
         $Confidence = 0
 	$TestMB = 25
 
-        if ($workingMB -ge 28 -or $privateMB -ge 18) {
+        if ($workingMB -ge 32) {
             Write-Host "The system is running." -ForegroundColor Red
           		 $BoundedMB = [Math]::Max(20, [Math]::Min(40, $WorkingMB))
-		$Confidence = ($BoundedMB - 20) * 5           
+		$Confidence = ($BoundedMB - 20) * 5         
         }
         
-        if ($workingMB -le 24) {
+        if ($workingMB -le 31) {
             Write-Host "The system is not running." -ForegroundColor Green
 			$BoundedMB = [Math]::Max(20, [Math]::Min(40, $WorkingMB))
 
@@ -33,7 +33,7 @@ while($true) {
         Write-Host "Private: $privateMB MB" -ForegroundColor White
         Write-Host "Total Physical (WS): $workingMB MB" -ForegroundColor White
         Write-Host "----------------------------------"
-        Write-Host "Press Ctrl+C to stop" -ForegroundColor DarkGray
+        Write-Host "Press Ctrl+C to immediately close the window." -ForegroundColor DarkGray
 
     } else {
         Write-Host "Searching for $processName..." -ForegroundColor Red
@@ -41,5 +41,18 @@ while($true) {
     
     Start-Sleep -Seconds 1
 }
+catch {
+    Clear-Host
+    Write-Host "==================================================" -ForegroundColor Red
+    Write-Host " SCRIPT LAUNCH FAILED DURING INITIALISATION " -ForegroundColor Red
+    Write-Host "==================================================" -ForegroundColor Red
+    Write-Host "Error Type Details:" -ForegroundColor Yellow
+    Write-Host $_.Exception.Message -ForegroundColor White
+    Write-Host "`nStack Location Trace:" -ForegroundColor Yellow
+    Write-Host $_.ScriptStackTrace -ForegroundColor Gray
+    Write-Host "==================================================" -ForegroundColor Red
+    Write-Host "`nThe script has paused to let you read this error." -ForegroundColor Cyan
 
-#Created by blits
+}
+
+#Created by reallquitesimple
