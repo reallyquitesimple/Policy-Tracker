@@ -21,6 +21,7 @@ while($true) {
 		
 	elseif ($workingMB -gt 27 -and $workingMB -lt 32) {
 		Write-Host "The system is sleeping." -ForegroundColor Gray
+		Write-Host "It is active on the host computer, but is conserving memory usage by not taking thumbnails of your computer." -ForegroundColor Gray
 		$Confidence = :Round((32 - $workingMB) / 5 * 100, 0)
 }         
         }
