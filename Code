@@ -17,10 +17,15 @@ while($true) {
         if ($workingMB -ge 32) {
             Write-Host "The system is running." -ForegroundColor Red
           		 $BoundedMB = [Math]::Max(20, [Math]::Min(40, $WorkingMB))
-		$Confidence = ($BoundedMB - 20) * 5         
+		$Confidence = ($BoundedMB - 20) * 5
+		
+	elseif ($workingMB -gt 27 -and $workingMB -lt 32) {
+		Write-Host "The system is sleeping." -ForegroundColor Gray
+		$Confidence = :Round((32 - $workingMB) / 5 * 100, 0)
+}         
         }
         
-        if ($workingMB -le 31) {
+        if ($workingMB -le 27) {
             Write-Host "The system is not running." -ForegroundColor Green
 			$BoundedMB = [Math]::Max(20, [Math]::Min(40, $WorkingMB))
 
@@ -55,4 +60,4 @@ catch {
 
 }
 
-#Created by reallquitesimple
+#Created by Ollie/reallyquitesimple
